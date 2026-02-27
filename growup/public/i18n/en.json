@@ -225,6 +225,7 @@
     "cycleRange": "Current period",
     "reportTitle": "Summary report",
     "previousCycles": "Previous cycles",
+    "dailyPoints": "Daily points",
     "noPreviousCycles": "No previous cycles found.",
     "previousXp": "Previous cycle XP",
     "previousRange": "Previous period"

@@ -130,8 +130,8 @@ export class SummaryReportDialogComponent {
 
   private buildDateKeys(start: string, end: string): string[] {
     const keys: string[] = [];
-    const cursor = new Date(start);
-    const endDate = new Date(end);
+    const cursor = this.parseDateKey(start);
+    const endDate = this.parseDateKey(end);
     while (cursor <= endDate) {
       keys.push(this.dateKey(cursor));
       cursor.setDate(cursor.getDate() + 1);
@@ -152,22 +152,27 @@ export class SummaryReportDialogComponent {
   }
 
   private subtractDays(dateKey: string, amount: number): string {
-    const date = new Date(dateKey);
+    const date = this.parseDateKey(dateKey);
     date.setDate(date.getDate() - amount);
     return this.dateKey(date);
   }
 
   private subtractMonths(dateKey: string, amount: number): string {
-    const date = new Date(dateKey);
+    const date = this.parseDateKey(dateKey);
     date.setMonth(date.getMonth() - amount);
     date.setDate(date.getDate() + 1);
     return this.dateKey(date);
   }
 
   private subtractYears(dateKey: string, amount: number): string {
-    const date = new Date(dateKey);
+    const date = this.parseDateKey(dateKey);
     date.setFullYear(date.getFullYear() - amount);
     date.setDate(date.getDate() + 1);
     return this.dateKey(date);
+  }
+
+  private parseDateKey(dateKey: string): Date {
+    const [year, month, day] = dateKey.split('-').map(Number);
+    return new Date(year, month - 1, day);
   }
 }

@@ -2,6 +2,10 @@
   min-width: min(560px, 92vw);
 }
 
+.report-dialog ::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+  text-transform: uppercase;
+}
+
 .tab-content {
   padding: 0.9rem 0.2rem 0.2rem;
 }

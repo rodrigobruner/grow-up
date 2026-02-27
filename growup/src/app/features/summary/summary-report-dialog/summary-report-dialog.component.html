@@ -2,7 +2,7 @@
 
 <mat-dialog-content class="report-dialog">
   <mat-tab-group>
-    <mat-tab label="Summary report">
+    <mat-tab label="{{ 'summary.reportTitle' | translate }}">
       <div class="tab-content">
         <div class="report-grid">
           <div>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="PREVIOUS CYCLES">
+    <mat-tab label="{{ 'summary.previousCycles' | translate }}">
       <div class="tab-content">
         <div class="previous-cycles" *ngIf="data.previousCycles.length">
           <div class="previous-header">
@@ -55,7 +55,7 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="DAILY POINTS">
+    <mat-tab label="{{ 'summary.dailyPoints' | translate }}">
       <div class="tab-content">
         <mat-form-field appearance="outline" class="filter-select">
           <mat-label>Filtro</mat-label>
