@@ -223,6 +223,9 @@
     "xpSpent": "XP gasto",
     "cycleXp": "XP no ciclo {{ cycle }}",
     "cycleRange": "Período atual",
+    "reportTitle": "Relatório de resumo",
+    "previousCycles": "Ciclos anteriores",
+    "noPreviousCycles": "Nenhum ciclo anterior encontrado.",
     "previousXp": "XP ciclo anterior",
     "previousRange": "Período anterior"
   },

@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>{{ 'summary.reportTitle' | translate }}</h2>
+
+<mat-dialog-content class="report-dialog">
+  <mat-tab-group>
+    <mat-tab label="Summary report">
+      <div class="tab-content">
+        <div class="report-grid">
+          <div>
+            <p class="report-label">{{ 'summary.level' | translate }}</p>
+            <p class="report-value">{{ 'summary.levelValue' | translate: { level: data.level } }}</p>
+          </div>
+          <div>
+            <p class="report-label">{{ 'summary.nextLevel' | translate }}</p>
+            <p class="report-value">{{ data.xpToNext }} XP</p>
+          </div>
+          <div>
+            <p class="report-label">{{ 'summary.xpEarned' | translate }}</p>
+            <p class="report-value">{{ data.earned }} XP</p>
+          </div>
+          <div>
+            <p class="report-label">{{ 'summary.xpSpent' | translate }}</p>
+            <p class="report-value">{{ data.spent }} XP</p>
+          </div>
+          <div>
+            <p class="report-label">{{ 'summary.xpAvailable' | translate }}</p>
+            <p class="report-value">{{ data.available }} XP</p>
+          </div>
+          <div>
+            <p class="report-label">{{ 'summary.cycleXp' | translate: { cycle: data.cycleLabel } }}</p>
+            <p class="report-value">{{ data.cycleEarned }} XP</p>
+          </div>
+          <div class="report-span">
+            <p class="report-label">{{ 'summary.cycleRange' | translate }}</p>
+            <p class="report-value">{{ data.cycleRangeLabel }}</p>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="PREVIOUS CYCLES">
+      <div class="tab-content">
+        <div class="previous-cycles" *ngIf="data.previousCycles.length">
+          <div class="previous-header">
+            <span>{{ 'summary.cycleRange' | translate }}</span>
+            <span>{{ 'summary.xpEarned' | translate }}</span>
+            <span>{{ 'summary.xpSpent' | translate }}</span>
+          </div>
+          <div class="previous-row" *ngFor="let cycle of data.previousCycles">
+            <span class="period">{{ cycle.rangeLabel }}</span>
+            <span>{{ cycle.earned }} XP</span>
+            <span>{{ cycle.spent }} XP</span>
+          </div>
+        </div>
+        <div class="empty-state" *ngIf="!data.previousCycles.length">
+          {{ 'summary.noPreviousCycles' | translate }}
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="DAILY POINTS">
+      <div class="tab-content">
+        <mat-form-field appearance="outline" class="filter-select">
+          <mat-label>Filtro</mat-label>
+          <mat-select [value]="selectedFilter()" (valueChange)="onFilterChange($event)">
+            <mat-option *ngFor="let item of filterOptions" [value]="item.key">
+              {{ item.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <app-admin-line-chart
+          [labels]="chartLabels()"
+          [series]="chartSeries()"
+          [loading]="false"
+          [emptyLabel]="'Sem pontos no período selecionado.'"
+          [width]="620"
+          [height]="260"
+        />
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{ 'auth.close' | translate }}</button>
+</mat-dialog-actions>

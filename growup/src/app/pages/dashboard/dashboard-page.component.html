@@ -70,8 +70,11 @@
         [cycleLabel]="cycleLabel()"
         [cycleEarned]="cycleEarned()"
         [cycleRangeLabel]="cycleRangeLabel()"
-        [previousCycleEarned]="previousCycleEarned()"
-        [previousCycleLabel]="previousCycleLabel()"
+        [currentCycleStart]="currentCycleRange().start"
+        [currentCycleEnd]="currentCycleRange().end"
+        [previousCycleStart]="previousCycleRange()?.start ?? null"
+        [previousCycleEnd]="previousCycleRange()?.end ?? null"
+        [previousCyclesReport]="previousCyclesReport()"
       />
 
       <app-onboarding-card
