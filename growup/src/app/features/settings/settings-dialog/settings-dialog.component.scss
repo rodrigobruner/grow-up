@@ -94,10 +94,10 @@
 
 .avatar-fields {
   display: grid;
-  gap: 1.05rem;
+  gap: 5px;
   align-self: center;
   align-content: center;
-  transform: translateY(-10px);
+  transform: translateY(10px);
 }
 
 .avatar-preview img {
@@ -236,11 +236,23 @@
 
 .drawer-actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 1.5rem 0.75rem;
   min-height: 52px;
   max-height: 70px;
+}
+
+.drawer-actions-left {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+}
+
+.drawer-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .section-grid {
@@ -276,6 +288,16 @@
 
   .cache-actions {
     grid-template-columns: 1fr;
+  }
+
+  .drawer-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .drawer-actions-right {
+    justify-content: flex-end;
   }
 }
 

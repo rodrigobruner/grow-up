@@ -274,6 +274,12 @@
   "settingsDialog": {
     "title": "Configurações",
     "planLabel": "Plano",
+    "plan": {
+      "free": "Grátis",
+      "beta": "Beta",
+      "pro": "Pro",
+      "dev": "Dev"
+    },
     "languageSection": "Idioma",
     "cycleSection": "Ciclo",
     "levelupSection": "Level-up",

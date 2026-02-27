@@ -8,7 +8,6 @@
   <div class="drawer-scroll">
     <form [formGroup]="form" class="dialog-form form-grid">
       <app-settings-language-section [form]="form" />
-      <app-settings-plan-section [accountSettings]="accountSettings" />
       <app-settings-profiles-section
         [form]="form"
         [profiles]="profiles"
@@ -28,9 +27,16 @@
     </form>
   </div>
   <div class="drawer-actions">
-    <button mat-button (click)="close()">{{ 'settingsDialog.cancel' | translate }}</button>
-    <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid">
-      {{ 'settingsDialog.save' | translate }}
-    </button>
+    <div class="drawer-actions-left">
+      <div class="plan-pill" *ngIf="accountSettings">
+        {{ ('settingsDialog.plan.' + accountSettings.plan.toLowerCase()) | translate }}
+      </div>
+    </div>
+    <div class="drawer-actions-right">
+      <button mat-button (click)="close()">{{ 'settingsDialog.cancel' | translate }}</button>
+      <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid">
+        {{ 'settingsDialog.save' | translate }}
+      </button>
+    </div>
   </div>
 </div>
