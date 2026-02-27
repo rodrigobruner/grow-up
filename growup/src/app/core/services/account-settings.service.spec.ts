@@ -35,7 +35,7 @@ describe('AccountSettingsService', () => {
     expect(result?.flags).toEqual({});
   });
 
-  it('loads plan flags when flags are empty and user is logged in', async () => {
+  it('loads plan flags when user is logged in', async () => {
     const saveAccountSettings = vi.fn();
     const settings: AccountSettings = { id: 'account', language: 'en', role: 'USER', plan: 'PRO', flags: {} };
     const rpc = vi.fn().mockResolvedValue({ data: { rewards: true, tasks: false }, error: null });
@@ -54,6 +54,34 @@ describe('AccountSettingsService', () => {
 
     expect(rpc).toHaveBeenCalledWith('get_current_plan_feature_flags');
     expect(result?.flags).toEqual({ rewards: true, tasks: false });
+    expect(saveAccountSettings).not.toHaveBeenCalled();
+  });
+
+  it('overrides stale local flags with RPC flags when user is logged in', async () => {
+    const saveAccountSettings = vi.fn();
+    const settings: AccountSettings = {
+      id: 'account',
+      language: 'en',
+      role: 'USER',
+      plan: 'PRO',
+      flags: { rewards: false, tasks: true, profiles: true }
+    };
+    const rpc = vi.fn().mockResolvedValue({ data: { rewards: true, tasks: false, profiles: false }, error: null });
+
+    TestBed.configureTestingModule({
+      providers: [
+        AccountSettingsService,
+        { provide: GrowUpDbService, useValue: { getAccountSettings: vi.fn().mockResolvedValue(settings), saveAccountSettings } },
+        { provide: TranslateService, useValue: { setDefaultLang: vi.fn(), use: vi.fn(), currentLang: 'en', getDefaultLang: () => 'en' } },
+        { provide: AuthService, useValue: { isLoggedIn: () => true, getClient: () => ({ rpc }) } }
+      ]
+    });
+
+    const service = TestBed.inject(AccountSettingsService);
+    const result = await service.loadOrSeed(true);
+
+    expect(rpc).toHaveBeenCalledWith('get_current_plan_feature_flags');
+    expect(result?.flags).toEqual({ rewards: true, tasks: false, profiles: false });
     expect(saveAccountSettings).not.toHaveBeenCalled();
   });
 

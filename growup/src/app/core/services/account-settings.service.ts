@@ -61,9 +61,6 @@ export class AccountSettingsService {
   }
 
   private async applyEffectiveFlags(settings: AccountSettings): Promise<AccountSettings> {
-    if (settings.flags && Object.keys(settings.flags).length > 0) {
-      return settings;
-    }
     if (!this.auth.isLoggedIn()) {
       return settings;
     }

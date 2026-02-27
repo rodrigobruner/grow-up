@@ -42,7 +42,8 @@ testem.log
 __screenshots__/
 /src/app/supabase-config.ts
 /src/environments/environment.local.ts
-/growup/.env.local
+/growup/.env*
+!/growup/.env.example
 
 # System files
 .DS_Store
