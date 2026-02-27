@@ -164,6 +164,10 @@ export class DashboardPageComponent implements OnInit {
       if (!userId) {
         return;
       }
+      const account = this.accountSettings();
+      if (!account.termsVersion || !account.termsAcceptedAt) {
+        return;
+      }
       this.hasTrackedDailyAccess = true;
       void this.accessTracking.trackDailyAccess(userId);
     });

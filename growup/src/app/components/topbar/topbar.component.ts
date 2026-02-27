@@ -62,9 +62,9 @@ export class TopbarComponent {
   private readonly avatarCache = inject(AvatarCacheService);
   readonly isLoggedIn = computed(() => this.auth.isLoggedIn());
   readonly avatarLoadFailed = signal(false);
-  private readonly lastAvatarUrl = signal<string | null>(null);
+  private lastAvatarUrl: string | null = null;
   private readonly cachedAvatarUrl = signal<string | null>(null);
-  private readonly cachedAvatarObjectUrl = signal<string | null>(null);
+  private cachedAvatarObjectUrl: string | null = null;
   readonly language = computed(() => this.state.accountSettings().language ?? 'en');
   readonly languageOptions: Array<{ value: AccountSettings['language']; flag: string }> = [
     { value: 'en', flag: '🇺🇸' },
@@ -106,20 +106,18 @@ export class TopbarComponent {
   constructor() {
     effect((onCleanup) => {
       const url = this.userAvatarUrl();
-      if (this.lastAvatarUrl() !== url) {
-        this.lastAvatarUrl.set(url);
-        this.avatarLoadFailed.set(false);
-      }
-
-      const previousObjectUrl = this.cachedAvatarObjectUrl();
-      if (previousObjectUrl && previousObjectUrl.startsWith('blob:')) {
-        URL.revokeObjectURL(previousObjectUrl);
-      }
-      this.cachedAvatarObjectUrl.set(null);
-      this.cachedAvatarUrl.set(null);
 
       if (!url) {
+        this.lastAvatarUrl = null;
+        this.clearCachedAvatarUrl();
+        this.avatarLoadFailed.set(false);
         return;
+      }
+
+      if (this.lastAvatarUrl !== url) {
+        this.lastAvatarUrl = url;
+        this.clearCachedAvatarUrl();
+        this.avatarLoadFailed.set(false);
       }
 
       let cancelled = false;
@@ -140,10 +138,18 @@ export class TopbarComponent {
         }
         this.cachedAvatarUrl.set(cached);
         if (cached.startsWith('blob:')) {
-          this.cachedAvatarObjectUrl.set(cached);
+          this.cachedAvatarObjectUrl = cached;
         }
       });
     });
+  }
+
+  private clearCachedAvatarUrl(): void {
+    if (this.cachedAvatarObjectUrl && this.cachedAvatarObjectUrl.startsWith('blob:')) {
+      URL.revokeObjectURL(this.cachedAvatarObjectUrl);
+    }
+    this.cachedAvatarObjectUrl = null;
+    this.cachedAvatarUrl.set(null);
   }
 
   emitOpenAuthDialog(): void {
