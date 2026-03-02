@@ -38,24 +38,16 @@
             </p>
             <p class="summary-value">{{ cycleEarned }} XP</p>
           </div>
-          <div>
-            <p class="summary-label">{{ 'summary.cycleRange' | translate }}</p>
-            <p class="summary-value small">{{ cycleRangeLabel }}</p>
+          <div class="period-with-action">
+            <div>
+              <p class="summary-label">{{ 'summary.cycleRange' | translate }}</p>
+              <p class="summary-value small">{{ cycleRangeLabel }}</p>
+            </div>
+            <button mat-fab color="primary" type="button" class="report-fab" aria-label="Report" (click)="openReportDialog()">
+              <span class="material-icons">summarize</span>
+            </button>
           </div>
         </div>
-        @if (previousCycleEarned !== null) {
-          <mat-divider></mat-divider>
-          <div class="summary-row">
-            <div>
-              <p class="summary-label">{{ 'summary.previousXp' | translate }}</p>
-              <p class="summary-value">{{ previousCycleEarned }} XP</p>
-            </div>
-            <div>
-              <p class="summary-label">{{ 'summary.previousRange' | translate }}</p>
-              <p class="summary-value small">{{ previousCycleLabel }}</p>
-            </div>
-          </div>
-        }
       </div>
     </div>
   } @else {

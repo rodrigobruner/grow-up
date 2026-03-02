@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { PreviousCycleReport } from '../../../../core/services/summary.service';
 import { SummaryCardComponent } from '../../../../features/summary/summary-card/summary-card.component';
 
 @Component({
@@ -23,6 +24,9 @@ export class DashboardHeroSectionComponent {
   @Input() cycleLabel = '';
   @Input() cycleEarned = 0;
   @Input() cycleRangeLabel = '';
-  @Input() previousCycleEarned: number | null = null;
-  @Input() previousCycleLabel = '';
+  @Input() currentCycleStart = '';
+  @Input() currentCycleEnd = '';
+  @Input() previousCycleStart: string | null = null;
+  @Input() previousCycleEnd: string | null = null;
+  @Input() previousCyclesReport: PreviousCycleReport[] = [];
 }

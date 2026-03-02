@@ -46,6 +46,29 @@ describe('AccessTrackingService', () => {
     expect(warn).toHaveBeenCalledWith('admin.access.track.failed', { message: 'fail' });
   });
 
+  it('does not log warning for RLS forbidden errors', async () => {
+    const warn = vi.fn();
+    const upsert = vi.fn().mockResolvedValue({
+      error: { code: '42501', message: 'new row violates row-level security policy' }
+    });
+    const client = {
+      from: () => ({ upsert })
+    };
+
+    TestBed.configureTestingModule({
+      providers: [
+        AccessTrackingService,
+        { provide: AuthService, useValue: { getClient: () => client } },
+        { provide: LoggerService, useValue: { warn } }
+      ]
+    });
+
+    const service = TestBed.inject(AccessTrackingService);
+    await service.trackDailyAccess('user-1');
+
+    expect(warn).not.toHaveBeenCalled();
+  });
+
   it('uses date key from current date', async () => {
     const upsert = vi.fn().mockResolvedValue({ error: null });
     const client = {

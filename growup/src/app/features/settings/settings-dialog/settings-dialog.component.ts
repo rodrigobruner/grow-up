@@ -16,7 +16,6 @@ import { ConfirmDialogComponent } from '../../../components/confirm-dialog/confi
 import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
 import { AuthErrorDialogComponent } from '../../auth/auth-error-dialog/auth-error-dialog.component';
 import { SettingsLanguageSectionComponent } from './sections/settings-language-section/settings-language-section.component';
-import { SettingsPlanSectionComponent } from './sections/settings-plan-section/settings-plan-section.component';
 import { SettingsProfilesSectionComponent } from './sections/settings-profiles-section/settings-profiles-section.component';
 import { SettingsCycleSectionComponent } from './sections/settings-cycle-section/settings-cycle-section.component';
 import { SettingsLevelupSectionComponent } from './sections/settings-levelup-section/settings-levelup-section.component';
@@ -35,7 +34,6 @@ import { SettingsDangerSectionComponent } from './sections/settings-danger-secti
     MatButtonModule,
     TranslateModule,
     SettingsLanguageSectionComponent,
-    SettingsPlanSectionComponent,
     SettingsProfilesSectionComponent,
     SettingsCycleSectionComponent,
     SettingsLevelupSectionComponent,

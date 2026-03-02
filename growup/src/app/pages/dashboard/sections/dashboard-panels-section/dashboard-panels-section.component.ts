@@ -6,6 +6,7 @@ import { Task } from '../../../../core/models/task';
 import { Reward } from '../../../../core/models/reward';
 import { RewardRedemption } from '../../../../core/models/redemption';
 import { RewardUse } from '../../../../core/models/reward-use';
+import { Completion } from '../../../../core/models/completion';
 
 @Component({
   selector: 'app-dashboard-panels-section',
@@ -18,6 +19,7 @@ export class DashboardPanelsSectionComponent {
   @Input() showDashboard = false;
   @Input() showRewardsPanel = false;
   @Input() tasks: Task[] = [];
+  @Input() completions: Completion[] = [];
   @Input() todayDoneIds = new Set<string>();
   @Input() selectedDate = '';
   @Input() todayKey = '';

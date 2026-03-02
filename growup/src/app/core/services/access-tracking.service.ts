@@ -21,9 +21,17 @@ export class AccessTrackingService {
         { onConflict: 'owner_id,accessed_at' }
       );
 
-    if (error) {
+    if (error && !this.isRlsForbidden(error)) {
       this.logger.warn('admin.access.track.failed', { message: error.message });
     }
+  }
+
+  private isRlsForbidden(error: { code?: string | null; message?: string | null }): boolean {
+    if (error.code === '42501') {
+      return true;
+    }
+    const message = (error.message ?? '').toLowerCase();
+    return message.includes('row-level security') || message.includes('permission denied');
   }
 
   private formatDateKey(date: Date): string {

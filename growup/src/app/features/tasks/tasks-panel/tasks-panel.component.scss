@@ -69,6 +69,42 @@
   display: none;
 }
 
+::ng-deep .tasks-date-picker .calendar-day--with-points .mat-calendar-body-cell-content {
+  position: relative;
+}
+
+::ng-deep .tasks-date-picker .mat-calendar-body-selected {
+  color: var(--color-white) !important;
+}
+
+::ng-deep .tasks-date-picker .mat-calendar-body-selected::after {
+  display: none;
+}
+
+::ng-deep .tasks-date-picker .calendar-day--with-points .mat-calendar-body-cell-content::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #55c271;
+}
+
+::ng-deep .tasks-date-picker .calendar-day--without-points .mat-calendar-body-cell-content::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #e36a6a;
+}
+
 .panel h2 {
   margin-top: 0;
   font-size: 1.4rem;

@@ -1,6 +1,7 @@
 <section class="grid" *ngIf="showDashboard" [class.grid--single]="!showRewardsPanel">
   <app-tasks-panel
     [tasks]="tasks"
+    [completions]="completions"
     [todayDoneIds]="todayDoneIds"
     [selectedDate]="selectedDate"
     [todayKey]="todayKey"

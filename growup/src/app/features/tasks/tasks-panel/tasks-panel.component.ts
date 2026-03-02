@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Task } from '../../../core/models/task';
+import { Completion } from '../../../core/models/completion';
 
 @Component({
   selector: 'app-tasks-panel',
@@ -27,6 +28,7 @@ import { Task } from '../../../core/models/task';
 })
 export class TasksPanelComponent {
   @Input({ required: true }) tasks: Task[] = [];
+  @Input() completions: Completion[] = [];
   @Input({ required: true }) todayDoneIds = new Set<string>();
   @Input({ required: true }) selectedDate = '';
   @Input({ required: true }) todayKey = '';
@@ -49,6 +51,19 @@ export class TasksPanelComponent {
   get maxDate(): Date | null {
     return this.parseDateKey(this.todayKey);
   }
+
+  readonly dateClass = (date: Date): string => {
+    const today = this.maxDate;
+    if (!today) {
+      return '';
+    }
+    if (date.getTime() > today.getTime()) {
+      return '';
+    }
+    const key = this.toDateKey(date);
+    const hasPoints = this.completions.some((completion) => completion.date === key && completion.points > 0);
+    return hasPoints ? 'calendar-day--with-points' : 'calendar-day--without-points';
+  };
 
   swipeOffset(taskId: string): number {
     return this.swipeOffsets()[taskId] ?? 0;

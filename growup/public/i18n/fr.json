@@ -223,6 +223,10 @@
     "xpSpent": "XP dépensée",
     "cycleXp": "XP du cycle {{ cycle }}",
     "cycleRange": "Période actuelle",
+    "reportTitle": "Rapport de synthèse",
+    "previousCycles": "Cycles précédents",
+    "dailyPoints": "Points quotidiens",
+    "noPreviousCycles": "Aucun cycle précédent trouvé.",
     "previousXp": "XP du cycle précédent",
     "previousRange": "Période précédente"
   },
@@ -274,6 +278,12 @@
   "settingsDialog": {
     "title": "Paramètres",
     "planLabel": "Plan",
+    "plan": {
+      "free": "Gratuit",
+      "beta": "Bêta",
+      "pro": "Pro",
+      "dev": "Dev"
+    },
     "languageSection": "Langue",
     "cycleSection": "Cycle",
     "levelupSection": "Montée en niveau",

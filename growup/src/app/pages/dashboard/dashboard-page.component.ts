@@ -89,8 +89,8 @@ export class DashboardPageComponent implements OnInit {
   readonly balance = this.summary.balance;
   readonly cycleEarned = this.summary.cycleEarned;
   readonly currentCycleRange = this.summary.cycleRange;
-  readonly previousCycleEarned = this.summary.previousCycleEarned;
-  readonly previousCycleLabel = this.summary.previousCycleLabel;
+  readonly previousCycleRange = this.summary.previousCycleRange;
+  readonly previousCyclesReport = this.summary.previousCyclesReport;
   readonly level = this.summary.level;
   readonly xpIntoLevel = this.summary.xpIntoLevel;
   readonly xpToNext = this.summary.xpToNext;
@@ -162,6 +162,10 @@ export class DashboardPageComponent implements OnInit {
       }
       const userId = this.auth.user()?.id;
       if (!userId) {
+        return;
+      }
+      const account = this.accountSettings();
+      if (!account.termsVersion || !account.termsAcceptedAt) {
         return;
       }
       this.hasTrackedDailyAccess = true;
